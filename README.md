@@ -1,36 +1,203 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Libas — Clothing E-Commerce Website
+
+A modern clothing e-commerce website built with Next.js, MongoDB, Mongoose, Cloudinary, and Clerk. Libas allows customers to explore clothing collections, view product details, select sizes, add products to their cart, place orders, and track their orders. It also provides an admin panel for managing products and customer orders.
+
+## Features
+
+### Customer Experience
+- Modern and responsive user interface
+- Home page with a clothing-focused hero section
+- Separate Female, Male, and Kids collections
+- Product search functionality
+- Product detail pages with images, prices, descriptions, and available sizes
+- Shopping cart with quantity management, item removal, and total calculation
+- Cart persistence using Local Storage
+- Checkout form for customer information and delivery address
+- Order placement and order ID generation
+- Order tracking by order information
+- Customer authentication using Clerk
+- About and Contact pages
+
+### Admin Panel
+- Protected admin dashboard
+- Add new clothing products
+- Edit existing products
+- Delete products
+- Upload product images using Cloudinary
+- Manage customer orders
+- Update order statuses
+- View customer and order details
+
+### Backend and Database
+- REST API routes using Next.js App Router
+- MongoDB Atlas database integration
+- Mongoose models for products and orders
+- API-based product management
+- Database-backed order creation and management
+
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| Next.js | Full-stack web application and routing |
+| React | User interface |
+| JavaScript (JSX) | Application logic |
+| Tailwind CSS | Styling and responsive design |
+| MongoDB Atlas | Cloud database |
+| Mongoose | MongoDB object modeling |
+| Cloudinary | Product image uploads and hosting |
+| Clerk | Authentication and user management |
+| React Icons | Interface icons |
+| Git and GitHub | Version control and source code hosting |
+| Vercel | Deployment platform |
+
+## Project Structure
+
+```text
+libas/
+├── scripts/             # Utility and seed scripts
+├── src/
+│   ├── app/
+│   │   ├── about/
+│   │   ├── admin/
+│   │   │   ├── products/
+│   │   │   └── orders/
+│   │   ├── api/
+│   │   ├── cart/
+│   │   ├── checkout/
+│   │   ├── collections/
+│   │   ├── contact/
+│   │   ├── products/
+│   │   ├── search/
+│   │   ├── sign-in/
+│   │   ├── sign-up/
+│   │   └── track-order/
+│   ├── components/
+│   ├── context/
+│   ├── data/
+│   ├── libs/
+│   └── models/
+├── .gitignore
+├── package.json
+└── README.md
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Before running the project, make sure you have:
+
+- Node.js installed
+- npm installed
+- A MongoDB Atlas account and database
+- A Cloudinary account
+- A Clerk account for authentication
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/uzairshahzadpak/libas.git
+```
+
+### 2. Navigate to the Project
+
+```bash
+cd libas
+```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure Environment Variables
+
+Create a `.env.local` file in the project root directory.
+
+Add the environment variables required by your local project configuration, including your MongoDB connection string, Clerk keys, Cloudinary configuration, and admin email where applicable.
+
+Example:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=your_cloudinary_upload_preset
+
+ADMIN_EMAIL=your_admin_email
+```
+
+**Important:** Check the actual variable names used in your project before configuring them. If your image upload API requires additional Cloudinary credentials, configure those as well.
+
+Never commit `.env.local` or expose secret keys, database credentials, or private API credentials on GitHub.
+
+### 5. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the following URL in your browser:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Database
 
-## Learn More
+Libas uses MongoDB Atlas with Mongoose to store and manage application data.
 
-To learn more about Next.js, take a look at the following resources:
+The main database collections include:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Products:** Product names, prices, categories, collections, sizes, images, and descriptions.
+- **Orders:** Customer details, purchased items, totals, order information, and status.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Products can be managed through the Admin Panel rather than relying on hardcoded sample product data.
 
-## Deploy on Vercel
+## Image Management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Cloudinary is used to upload and host product images. The admin product form sends images through the configured upload flow and stores the resulting image URL with the product data.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Authentication and Admin Security
+
+Clerk provides sign-in and sign-up functionality. The admin area includes access protection so that only the configured admin account can access administrative pages.
+
+Configure the appropriate Clerk keys and admin settings before running the application in a new environment.
+
+## Deployment
+
+The project is intended to be deployed on Vercel.
+
+Deployment steps:
+
+1. Push the source code to GitHub.
+2. Import the repository into Vercel.
+3. Configure all required environment variables in Vercel Project Settings.
+4. Ensure MongoDB Atlas permits connections from the deployed application.
+5. Configure Cloudinary and Clerk for the production environment.
+6. Deploy and test the customer and admin workflows.
+
+**Live Demo:** Add the Vercel URL here after deployment succeeds.
+
+## Future Improvements
+
+- Product reviews and ratings
+- Enhanced product filtering and sorting
+- Inventory and stock management
+- Improved order notifications
+- Additional checkout and payment options
+- Further UI and performance improvements
+
+## Author
+
+**Uzair Shahzad**
+
+- GitHub: https://github.com/uzairshahzadpak
+- Repository: https://github.com/uzairshahzadpak/libas
+
+---
+
+*Libas — Discover Your Style.*
